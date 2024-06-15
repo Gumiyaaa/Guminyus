@@ -1,8 +1,7 @@
-Tentu, berikut adalah contoh deskripsi untuk repositori GitHub Anda yang berisi proyek tugas UAS Pemrograman Web:
+## UAS Pemrograman Web
 
 ---
 
-## UAS Pemrograman Web
 
 ### Deskripsi Proyek
 Proyek ini merupakan tugas akhir untuk mata kuliah Pemrograman Web. Proyek ini mencakup pembuatan sebuah situs web dengan menggunakan teknologi-teknologi web modern seperti HTML, CSS, JavaScript, dan PHP. Situs web ini dirancang untuk memenuhi kriteria yang diberikan dalam tugas UAS, dengan fokus pada desain responsif, interaktivitas, dan fungsionalitas.
