@@ -6,6 +6,7 @@ include('includes/config.php');
 if(isset($_POST['register'])) {
     $uname = $_POST['username'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Encrypting password
+    $email = $_POST['email']; // Add email from form input
     
     // Check if username already exists using prepared statement
     $check_query = "SELECT AdminUserName FROM tbladmin WHERE AdminUserName=?";
@@ -18,9 +19,9 @@ if(isset($_POST['register'])) {
         echo "<script>alert('Username already exists');</script>";
     } else {
         // Insert new user using prepared statement
-        $insert_query = "INSERT INTO tbladmin (AdminUserName, AdminPassword, Is_Active) VALUES (?, ?, 1)";
+        $insert_query = "INSERT INTO tbladmin (AdminUserName, AdminPassword, AdminEmailId, Is_Active) VALUES (?, ?, ?, 1)";
         $insert_stmt = mysqli_prepare($con, $insert_query);
-        mysqli_stmt_bind_param($insert_stmt, "ss", $uname, $password);
+        mysqli_stmt_bind_param($insert_stmt, "sss", $uname, $password, $email);
         
         if(mysqli_stmt_execute($insert_stmt)) {
             echo "<script>alert('Registration successful');</script>";
@@ -158,6 +159,11 @@ if(isset($_POST['login'])) {
                                         </div>
                                         <div class="form-group">
                                             <div class="col-xs-12">
+                                                <input class="form-control" type="email" required="" name="email" placeholder="Email" autocomplete="off">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-xs-12">
                                                 <input class="form-control" type="password" required="" name="password" placeholder="Password" autocomplete="off">
                                             </div>
                                         </div>
@@ -202,17 +208,18 @@ if(isset($_POST['login'])) {
     <script src="assets/js/jquery.app.js"></script>
 
     <script>
-        document.getElementById('showRegisterForm').addEventListener('click', function() {
+        document.getElementById('showRegisterForm').addEventListener('click', function(event) {
+            event.preventDefault(); // Hindari aksi default dari tautan
             document.getElementById('loginForm').style.display = 'none';
             document.getElementById('registerForm').style.display = 'block';
         });
 
-        document.getElementById('showLoginForm').addEventListener('click', function() {
+        document.getElementById('showLoginForm').addEventListener('click', function(event) {
+            event.preventDefault(); // Hindari aksi default dari tautan
             document.getElementById('registerForm').style.display = 'none';
-            document.getElementById('loginForm').style.display = 'block';
-        });
-    </script>
+document.getElementById('loginForm').style.display = 'block';
+});
+</script>
 
 </body>
-
 </html>
